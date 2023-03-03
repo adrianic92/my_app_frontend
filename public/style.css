@@ -5,3 +5,44 @@ html {
     min-width: 100%;
     min-height: 100%;
 }
+
+.title {
+    color: white;
+    position: absolute;
+    left: 1rem;
+    top: -0.6rem;
+    font-size: larger;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.navDiv {
+    display: flex;
+    background-color: rgba(0, 0, 0);
+    font-size: larger;
+}
+
+.navBar {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    margin: auto;
+}
+
+.link {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 1rem 5vw;
+    text-decoration: none;
+}
+
+.link :visited {
+    color: inherit;
+}
+
+.link :hover {
+    background-color: hsl(0, 85%, 90%);
+    color: black;
+    padding: 1rem 1rem;
+}
