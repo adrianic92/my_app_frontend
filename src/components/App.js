@@ -1,11 +1,21 @@
 import Home from './Home'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import NavBar from './NavBar';
 import NewFood from './NewFood';
 import RestaurantList from './RestaurantList';
 import { Route, Switch } from 'react-router-dom';
 
 function App() {
+  const [restaurants, setRestaurants] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:9292/restaurants")
+    .then(resp => resp.json())
+    .then(data => setRestaurants(data))
+  }, [])
+
+
+
   return (
     <div>
       <NavBar />
@@ -14,7 +24,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/restaurants">
-          <RestaurantList />
+          <RestaurantList restaurants={restaurants} />
         </Route>
         <Route path="/newfood">
           <NewFood/>

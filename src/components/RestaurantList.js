@@ -1,10 +1,16 @@
 import React from 'react'
 
-function RestaurantList() {
+function RestaurantList({restaurants}) {
+
+    const allRestaurants = restaurants.map(restaurant => {
+        return (
+            <RestaurantCard key={restaurant.id} restaurant={restaurant}/>
+        )
+    })
 
     return (
         <div>
-            Restaurants
+            {allRestaurants}
         </div>
     )
 }
