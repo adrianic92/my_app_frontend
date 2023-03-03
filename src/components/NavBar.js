@@ -11,6 +11,17 @@ function NavBar() {
                     Home
                 </Link>
             </li>
+            <li className="link">
+                <Link to="/restaurants">
+                    Restaurants
+                </Link>
+            </li>
+            <li className="link">
+                <Link to="/newfood">
+                    New Food
+                </Link>
+            </li>
+            
         </ul>
     </div>
   );
