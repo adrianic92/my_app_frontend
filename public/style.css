@@ -48,7 +48,7 @@ html {
     padding: 1rem 1rem;
 }
 
-.restaurantParent {
+.restaurantParent{
     border-radius: 0%;
     border-style: double;
     text-align: center;
@@ -74,4 +74,39 @@ html {
     color: white;
     border-radius: 15%;
     padding: .3rem;
+}
+
+.formChild {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: .5rem;
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    
+}
+
+.center {
+    text-align: center;
+}
+
+.submit {
+    font-size: large;
+    margin-left: 25%;
+    margin: auto;
+    margin-top: 1rem;
+}
+.form label, select {
+    text-align: center;
+    font-size: large;
+    margin-left: 25%;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.form {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    display: grid;
 }

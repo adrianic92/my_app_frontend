@@ -3,9 +3,11 @@ import React, {useState, useEffect} from 'react'
 import NavBar from './NavBar';
 import NewFood from './NewFood';
 import RestaurantList from './RestaurantList';
-import { Route, Switch } from 'react-router-dom';
+import EditRestaurant from './EditRestaurant';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 function App() {
+  const history = useHistory()
   const [restaurants, setRestaurants] = useState([])
 
   useEffect(() => {
@@ -13,6 +15,8 @@ function App() {
     .then(resp => resp.json())
     .then(data => setRestaurants(data))
   }, [])
+
+
 
   function handleDelete(restaurant) {
     fetch(`http://localhost:9292/restaurants/${restaurant.id}`, {
@@ -22,6 +26,17 @@ function App() {
       const updatedRestaurants = restaurants.filter( rest => rest.id !== restaurant.id )
       setRestaurants(updatedRestaurants)
     })
+  }
+
+  function addFood(newFood) {
+    fetch("http://localhost:9292/foods", {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify(newFood)
+    })
+    .then(() => history.push('/restaurants'))
   }
 
   return (
@@ -35,7 +50,10 @@ function App() {
           <RestaurantList restaurants={restaurants} handleDelete={handleDelete}/>
         </Route>
         <Route path="/newfood">
-          <NewFood/>
+          <NewFood restaurants={restaurants} addFood={addFood}/>
+        </Route>
+        <Route path="/editrestaurant">
+          <EditRestaurant restaurants={restaurants}/>
         </Route>
         <Route path="*">
           <h1 className='main error'>Oops!!! <br/>404 NOT FOUND! <br/>Try Again...</h1>

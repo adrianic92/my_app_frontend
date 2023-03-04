@@ -10,13 +10,11 @@ function RestaurantCard({restaurant, handleDelete}) {
         handleDelete(restaurant)
     }
 
-    
     useEffect( () => {
         fetch(`http://localhost:9292/restaurants/${restaurant.id}/foods`)
         .then(resp => resp.json())
         .then(data => setFoods(data))
     }, [])
-
 
     return (
         <div className='restaurantParent'>

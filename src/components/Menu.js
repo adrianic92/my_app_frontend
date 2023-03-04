@@ -3,7 +3,6 @@ import React from "react";
 function Menu({foods}) {
     
     const allFoods = foods.map( food => {
-        console.log(food)
         return (
                 <p key={food.id} style={{fontSize: "large"}}>Entree: {food.food_name} | Dessert Pairing: {food.dessert_pairing}</p>
         )
