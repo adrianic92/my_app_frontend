@@ -1,10 +1,11 @@
 import React from 'react'
+import RestaurantCard from './RestaurantCard'
 
-function RestaurantList({restaurants}) {
+function RestaurantList({restaurants, handleDelete}) {
 
     const allRestaurants = restaurants.map(restaurant => {
         return (
-            <RestaurantCard key={restaurant.id} restaurant={restaurant}/>
+            <RestaurantCard key={restaurant.id} restaurant={restaurant} handleDelete={handleDelete}/>
         )
     })
 

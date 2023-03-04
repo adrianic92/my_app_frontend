@@ -14,7 +14,15 @@ function App() {
     .then(data => setRestaurants(data))
   }, [])
 
-
+  function handleDelete(restaurant) {
+    fetch(`http://localhost:9292/restaurants/${restaurant.id}`, {
+      method: "DELETE"})
+    .then(resp => resp.json())
+    .then(() => {
+      const updatedRestaurants = restaurants.filter( rest => rest.id !== restaurant.id )
+      setRestaurants(updatedRestaurants)
+    })
+  }
 
   return (
     <div>
@@ -24,7 +32,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/restaurants">
-          <RestaurantList restaurants={restaurants} />
+          <RestaurantList restaurants={restaurants} handleDelete={handleDelete}/>
         </Route>
         <Route path="/newfood">
           <NewFood/>
