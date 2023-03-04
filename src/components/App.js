@@ -16,7 +16,15 @@ function App() {
     .then(data => setRestaurants(data))
   }, [])
 
-
+  function updateRestaurant(updatedRestaurant) {
+      const updatedRestaurants = restaurants.map( rest => {
+          if (rest.id === updatedRestaurant.id) {
+              return updatedRestaurant;
+          }
+          return rest;
+        });
+      setRestaurants(updatedRestaurants);
+  }
 
   function handleDelete(restaurant) {
     fetch(`http://localhost:9292/restaurants/${restaurant.id}`, {
@@ -53,7 +61,7 @@ function App() {
           <NewFood restaurants={restaurants} addFood={addFood}/>
         </Route>
         <Route path="/editrestaurant">
-          <EditRestaurant restaurants={restaurants}/>
+          <EditRestaurant restaurants={restaurants} updateRestaurant={updateRestaurant}/>
         </Route>
         <Route path="*">
           <h1 className='main error'>Oops!!! <br/>404 NOT FOUND! <br/>Try Again...</h1>
