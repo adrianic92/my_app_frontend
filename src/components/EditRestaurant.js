@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 
 function EditRestaurant({restaurants, updateRestaurant}) {
-    const [id, setId] = useState(1)
-    const [name, setName] = useState("Fast Burger")
-    const [description, setDescription] = useState("To deliver an exceptional shopping experience by offering the best service, value, quality, and freshest products while being good stewards of our environment and giving back to the communities we serve.")
-    const [rating, setRating] = useState(5)
-    const [location, setLocation] = useState("5728 Swift Manors, Framihaven, TN 40095")
+    const [id, setId] = useState(null)
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [rating, setRating] = useState(1)
+    const [location, setLocation] = useState("")
+    const [show, setShow] = useState(true)
     
     const allRestaurants = restaurants.map(restaurant => {
         return (
@@ -14,6 +15,7 @@ function EditRestaurant({restaurants, updateRestaurant}) {
     })
 
     function handleRestaurantChange(e) {
+        setShow(false)
         const id = parseInt(e.target.value)
         const restaurant = restaurants.find( x => x.id === id )
         console.log(id)
@@ -26,7 +28,11 @@ function EditRestaurant({restaurants, updateRestaurant}) {
     }
 
     function handleSubmit(e) {
+        
         e.preventDefault()
+        if (show) {
+            return
+        }
         console.log(name, description, rating, location)
         fetch(`http://localhost:9292/restaurants/${id}`, {
             method: "PATCH",
@@ -63,7 +69,10 @@ function EditRestaurant({restaurants, updateRestaurant}) {
     return (
         <div className="formParent">
             <h1 className="center">Edit A Restaurant Here</h1>
-            <select className="formChild" onChange={handleRestaurantChange}>{allRestaurants}</select>
+            <select className="formChild" onChange={handleRestaurantChange}>
+                {show ? <option value="none">Select a restaurant...</option> : null}
+                {allRestaurants}
+            </select>
             <form className="form" onSubmit={handleSubmit}>
                 <label>Name:</label>
                 <input type="text" name="name" className='formChild' value={name} onChange={handleNameChange}/>
