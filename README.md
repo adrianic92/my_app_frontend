@@ -1,4 +1,41 @@
-This is a test push.
+# Restaurants Project (Frontend)
+
+Welcome to my Restaurants Project! 
+
+This is the Frontend of the Phase 3 Project. The frontend consists of one Single Page Application that interacts with a Sinatra API backend that uses Active Record for this project to perform CREATE, READ, UPDATE, DELETE (CRUD) operations.
+
+### Create
+We can create new Foods through POST requests.
+
+### Read
+We can read all the restaurants in the database through GET requests.
+We can also read all of the foods for each restaurant through GET requests.
+
+### Update
+We can update the information from our restaurants to change the name, description, rating, and location.
+
+### Delete
+We can delete restaurants from our database. The database starts with a total of 10 restaurants.
+
+## Installation Instructions
+- Fork and Clone this repository
+- Run 'npm install' on your terminal to install dependencies
+- Run 'npm start' on your terminal to open the SPA
+- Fork and Clone the back end repository --> Follow this link "https://github.com/adrianic92/phase-3-sinatra-react-project" to get to the repository
+
+## Credits
+- Faker gem. Learn more at "https://github.com/faker-ruby/faker" for information for the restaurants and foods
+- Pexels at https://www.pexels.com/ for images
+
+
+
+
+
+
+
+
+
+
 
 # Getting Started with Create React App
 
