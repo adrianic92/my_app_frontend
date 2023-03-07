@@ -18,8 +18,6 @@ function EditRestaurant({restaurants, updateRestaurant}) {
         setShow(false)
         const id = parseInt(e.target.value)
         const restaurant = restaurants.find( x => x.id === id )
-        console.log(id)
-        console.log(restaurant, "This is the restaurant")
         setId(id)
         setName(restaurant.name)
         setDescription(restaurant.description)
