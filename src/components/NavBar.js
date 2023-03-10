@@ -22,6 +22,11 @@ function NavBar() {
                 </Link>
             </li>
             <li className="link">
+                <Link to="/newrestaurant">
+                    New Restaurant
+                </Link>
+            </li>
+            <li className="link">
                 <Link to="/editrestaurant">
                     Edit Restaurant
                 </Link>

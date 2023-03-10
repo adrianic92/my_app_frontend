@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import NewFood from './NewFood';
 import RestaurantList from './RestaurantList';
 import EditRestaurant from './EditRestaurant';
+import NewRestaurant from './NewRestaurant';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 function App() {
@@ -44,7 +45,24 @@ function App() {
       },
       body: JSON.stringify(newFood)
     })
-    .then(() => history.push('/restaurants'))
+    .then(() => {
+      history.push('/restaurants')
+    })
+  }
+
+  function addRestaurant(newRestaurant) {
+    fetch("http://localhost:9292/restaurants", {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify(newRestaurant)
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      setRestaurants([...restaurants, data])
+      history.push('/restaurants')
+    })
   }
 
   return (
@@ -59,6 +77,9 @@ function App() {
         </Route>
         <Route path="/newfood">
           <NewFood restaurants={restaurants} addFood={addFood}/>
+        </Route>
+        <Route path="/newrestaurant">
+          <NewRestaurant addRestaurant={addRestaurant}/>
         </Route>
         <Route path="/editrestaurant">
           <EditRestaurant restaurants={restaurants} updateRestaurant={updateRestaurant}/>
