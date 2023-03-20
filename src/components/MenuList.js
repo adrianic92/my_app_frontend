@@ -1,18 +1,17 @@
-import React, {useState, useEffect} from 'react'
-import Menu from './Menu'
+import React from 'react'
+import FoodCard from './FoodCard'
 
-function MenuList({id}) {
-    const [foods, setFoods] = useState([])
+function MenuList({restaurant, handleFoodDelete}) {
 
-    useEffect( () => {
-        fetch(`http://localhost:9292/restaurants/${id}/foods`)
-        .then(resp => resp.json())
-        .then(data => setFoods(data))
-    }, [])
-
+    const {foods} = restaurant
+    const allFoods = foods.map( food => {
+        return (
+            <FoodCard key={food.id} food={food} handleFoodDelete={handleFoodDelete}/>
+        )
+    })
 
     return (
-        <Menu id={id} foods={foods}/>
+        <div>{allFoods}</div>
     )
 }
 

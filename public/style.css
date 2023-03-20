@@ -67,6 +67,12 @@ html {
     font-size: large;
 }
 
+.remove {
+    background-color: red;
+    font-weight: 1000;
+    font-size: large;
+}
+
 .menu {
     margin-bottom: 1rem;
     font-size: large;

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import MenuList from './MenuList'
 
-function RestaurantCard({restaurant, handleDelete}) {
+function RestaurantCard({restaurant, handleDelete, handleFoodDelete}) {
     const {name, description, location, rating} = restaurant
     const [menu, setMenu] = useState(false)
     
@@ -19,7 +19,7 @@ function RestaurantCard({restaurant, handleDelete}) {
                 <h3>{description}</h3>
                 <button className='delete' onClick={handleClick}>X</button>
                 <button className='menu' onClick={() => setMenu(menu => !menu)}>View Menu</button>
-                {menu ? <MenuList id={restaurant.id}/> : null}
+                {menu ? <MenuList restaurant={restaurant} handleFoodDelete={handleFoodDelete}/> : null}
             </section>
         </div>
     )

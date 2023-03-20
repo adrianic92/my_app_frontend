@@ -18,11 +18,11 @@ function App() {
   }, [])
 
   function updateRestaurant(updatedRestaurant) {
-      const updatedRestaurants = restaurants.map( rest => {
-          if (rest.id === updatedRestaurant.id) {
+      const updatedRestaurants = restaurants.map( resto => {
+          if (resto.id === updatedRestaurant.id) {
               return updatedRestaurant;
           }
-          return rest;
+          return resto;
         });
       setRestaurants(updatedRestaurants);
   }
@@ -37,6 +37,26 @@ function App() {
     })
   }
 
+  function handleFoodDelete(food) {
+    fetch(`http://localhost:9292/foods/${food.id}`, {
+      method: "DELETE"})
+    .then(resp => resp.json())
+    .then(() => {
+      const updatedRestaurants = restaurants.map( rest => {
+        if (rest.id === food.restaurant_id) {
+          const updatedFoods = rest.foods.filter( item => item.id !== food.id)
+          const updatedResto = rest
+          updatedResto.foods = updatedFoods
+          return updatedResto
+        }
+        else {
+        return rest
+        }
+      })
+      setRestaurants(updatedRestaurants)
+    })
+  }
+
   function addFood(newFood) {
     fetch("http://localhost:9292/foods", {
       method: "POST",
@@ -45,7 +65,17 @@ function App() {
       },
       body: JSON.stringify(newFood)
     })
-    .then(() => {
+    .then(resp => resp.json())
+    .then(data => {
+      const updatedRestaurants = restaurants.map( restaurant => {
+        if (restaurant.id === parseInt(newFood.restaurant_id)) {
+          const updatedResto = restaurant
+          updatedResto.foods.push(data)
+          return updatedResto;
+      }
+          return restaurant;
+      })
+      setRestaurants(updatedRestaurants)
       history.push('/restaurants')
     })
   }
@@ -65,6 +95,8 @@ function App() {
     })
   }
 
+  console.log(restaurants)
+
   return (
     <div>
       <NavBar />
@@ -73,7 +105,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/restaurants">
-          <RestaurantList restaurants={restaurants} handleDelete={handleDelete}/>
+          <RestaurantList restaurants={restaurants} handleDelete={handleDelete} handleFoodDelete={handleFoodDelete}/>
         </Route>
         <Route path="/newfood">
           <NewFood restaurants={restaurants} addFood={addFood}/>

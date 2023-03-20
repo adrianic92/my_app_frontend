@@ -4,11 +4,15 @@ function NewFood({restaurants, addFood}) {
     const [name, setName] = useState("")
     const [dessert, setDessert] = useState("")
     const [restaurant, setRestaurant] = useState(1)
+    const [show, setShow] = useState(true)
 
     
 
     function handleSubmit(e) {
         e.preventDefault()
+        if (show) {
+            return
+        }
         const newFood = {
            food_name: name,
            dessert_pairing: dessert,
@@ -28,6 +32,7 @@ function NewFood({restaurants, addFood}) {
     }
 
     function handleRestaurantChange(e) {
+        setShow(false)
         setRestaurant(e.target.value)
     }
     
@@ -44,7 +49,10 @@ function NewFood({restaurants, addFood}) {
                 <input type="text" name="name" className='formChild' value={name} onChange={handleNameChange}/>
                 <label>Dessert:</label>
                 <input type="text" name="dessert" className='formChild' value={dessert} onChange={handleDessertChange}/>
-                <select onChange={handleRestaurantChange}>{allRestaurants}</select>
+                <select onChange={handleRestaurantChange}>
+                    {show ? <option value="none">Select a restaurant...</option> : null}
+                    {allRestaurants}
+                    </select>
                 <button type="submit" className='submit'>Submit</button>
             </form>
         </div>
