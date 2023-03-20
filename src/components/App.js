@@ -95,9 +95,7 @@ function App() {
       history.push('/restaurants')
     })
   }
-
-  console.log(restaurants)
-
+  
   return (
     <div>
       <NavBar />
