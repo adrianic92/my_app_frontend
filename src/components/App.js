@@ -25,6 +25,7 @@ function App() {
           return resto;
         });
       setRestaurants(updatedRestaurants);
+      history.push('/restaurants')
   }
 
   function handleDelete(restaurant) {
@@ -45,7 +46,7 @@ function App() {
       const updatedRestaurants = restaurants.map( rest => {
         if (rest.id === food.restaurant_id) {
           const updatedFoods = rest.foods.filter( item => item.id !== food.id)
-          const updatedResto = rest
+          const updatedResto = Object.assign({}, rest)
           updatedResto.foods = updatedFoods
           return updatedResto
         }
@@ -69,7 +70,7 @@ function App() {
     .then(data => {
       const updatedRestaurants = restaurants.map( restaurant => {
         if (restaurant.id === parseInt(newFood.restaurant_id)) {
-          const updatedResto = restaurant
+          const updatedResto = Object.assign({}, restaurant)
           updatedResto.foods.push(data)
           return updatedResto;
       }
